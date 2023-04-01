@@ -137,36 +137,20 @@ def test_M_step():
     p.M_step()
     assert np.allclose(p.W_hat, np.eye(2))
     assert np.allclose(p.sigma_sq_hat, 0.0)
+
+
 test_M_step()
 #%%
+def test_likelihood():
+    np.random.seed(0)
+    p = PPCA(2, 2, 1_000, np.eye(2), 1.0)
+    p.W_hat = np.eye(2)
+    p.sigma_sq_hat = 1.0
+    p.E_step()
+    best_likelihood = p.log_likelihood()
+    for _ in range(100):
+        p.W_hat = np.random.randn(2, 2)
+        p.sigma_sq_hat = np.random.rand()
+        assert p.log_likelihood() <= best_likelihood, f'{p.log_likelihood()} > {best_likelihood}'
 
-p = PPCA(2, 2, 10_000, np.array([[1, 0], [0, 1]]), 0.0)
-p.plot_EM(10)
-#%%
-p = PPCA(2, 2, 10_000, np.array([[1, 0], [0, 1]]), 0.0)
-bf_M = p.W.T @ p.W + p.sigma_sq * np.eye(2)
-for n in range(10_000):
-    p.exp_z_hat[n] = (
-        np.linalg.inv(bf_M) @ p.W.T @ (p.X[n, :].reshape(2, 1) - p.bar_x)
-    ).reshape(1, 2)
-    exp_z_hat_n = p.exp_z_hat[n].reshape(2, 1)
-    p.exp_z_zT_hat[n] = p.sigma_sq * np.linalg.inv(bf_M) + exp_z_hat_n @ exp_z_hat_n.T
-p.M_step()
-#%%
-p.sigma_sq_hat
-#%%
-(p.W_hat @ p.W_hat.T)
-# %%
-out = []
-for N in [100_000]:
-    p = PPCA(2, 2, N, np.array([[10, 0], [0, 1]]), 0.0)
-    p.EM(10)
-    out.append(p.statistics().to_frame().T)
-out = pd.concat(out, axis=0, ignore_index=True)
-# %%
-p.sigma_sq_hat
-# %%
-p.W_hat @ p.W_hat.T
-# %%
-np.linalg.eig(p.X.T @ p.X / p.N)
-# %%
+test_likelihood()
