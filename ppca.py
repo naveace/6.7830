@@ -1,5 +1,6 @@
 #%%
 from typing import Dict
+from numpy.linalg import inv
 from tqdm.auto import tqdm
 import numpy as np
 import plotly.express as px
@@ -106,7 +107,39 @@ class PPCA:
             )
         return float(output)
 
+
 #%%
+def test_E_step():
+    p = PPCA(2, 2, 1_000, np.eye(2), 0.0)
+    p.W_hat = np.eye(2)
+    p.sigma_sq_hat = 0.0
+    p.E_step()
+    assert np.allclose(p.exp_z_hat.mean(axis=0), np.zeros((1, 2)))
+
+
+test_E_step()
+#%%
+def test_M_step():
+    p = PPCA(2, 2, 1_000, np.eye(2), 0.0)
+    p.exp_z_hat = (
+        inv(p.W.T @ p.W + p.sigma_sq * np.eye(2)) @ p.W.T @ (p.X.T - p.bar_x)
+    ).T
+    p.exp_z_zT_hat = np.concatenate(
+        [
+            (
+                p.sigma_sq * inv(p.W.T @ p.W + p.sigma_sq * np.eye(2))
+                + p.exp_z_hat[n].reshape(p.M, 1) @ p.exp_z_hat[n].reshape(p.M, 1).T
+            ).reshape(1, p.M, p.M)
+            for n in range(len(p.exp_z_hat))
+        ],
+        axis=0,
+    )
+    p.M_step()
+    assert np.allclose(p.W_hat, np.eye(2))
+    assert np.allclose(p.sigma_sq_hat, 0.0)
+test_M_step()
+#%%
+
 p = PPCA(2, 2, 10_000, np.array([[1, 0], [0, 1]]), 0.0)
 p.plot_EM(10)
 #%%
