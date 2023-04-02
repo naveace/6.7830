@@ -15,7 +15,7 @@ class PPCA:
         self.N = N
         self.W = W  # D X M
         self.sigma_sq = sigma_sq
-        self.Z = np.random.randn(M, N) # Each column is a sample in all that follows
+        self.Z = np.random.randn(M, N)  # Each column is a sample in all that follows
         self.X: np.ndarray = self.W @ self.Z + np.random.randn(D, N) * np.sqrt(
             self.sigma_sq
         )
@@ -120,7 +120,11 @@ class PPCA:
         for n in range(self.N):
             output += (
                 -0.5 * self.D * np.log(2 * np.pi * self.sigma_sq_hat)
-                - 0.5 * self.M * np.log(2 * np.pi) # Note that this term is missing from Bishop, in Errata
+                - 0.5
+                * self.M
+                * np.log(
+                    2 * np.pi
+                )  # Note that this term is missing from Bishop, in Errata
                 - 0.5 * np.trace(self.exp_z_zT_hat[n])
                 - (0.5 / self.sigma_sq_hat)
                 * (self.X[:, n].reshape(self.D, 1) - self.bar_x).T
@@ -133,9 +137,14 @@ class PPCA:
                 * np.trace(self.exp_z_zT_hat[n] @ self.W_hat.T @ self.W_hat)
             )
         # Now we add the entropy of the Z distribution
+        bf_M = self.W_hat.T @ self.W_hat + self.sigma_sq_hat * np.eye(self.M)
         output += sum(
-            0.5 * np.log(np.linalg.det(2 * np.pi * np.e * self.exp_z_zT_hat[n]))
+            0.5
+            * np.log(
+                np.linalg.det(
+                   np.linalg.inv(bf_M)* self.sigma_sq_hat 
+                )
+            )
             for n in range(self.N)
         )
         return float(output)
-
