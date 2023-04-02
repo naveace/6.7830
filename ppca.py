@@ -4,6 +4,7 @@ from numpy.linalg import inv
 from tqdm.auto import tqdm
 import numpy as np
 import plotly.express as px
+from plotly.graph_objects import Figure
 import pandas as pd
 
 #%%
@@ -78,7 +79,7 @@ class PPCA:
             }
         )
 
-    def plot_EM(self, n_steps: int) -> None:
+    def plot_EM(self, n_steps: int) -> Figure:
         df = []
         for n in tqdm(range(n_steps)):
             self.E_step()
@@ -112,6 +113,7 @@ class PPCA:
             title="Distance from true parameters",
         )
         fig.show()
+        return fig
 
     def ELBO(self) -> float:
         output = 0.0
