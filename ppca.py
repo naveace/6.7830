@@ -16,10 +16,10 @@ class PPCA:
         self.W = W  # D X M
         self.sigma_sq = sigma_sq
         self.Z = np.random.randn(M, N)  # Each column is a sample in all that follows
-        self.X: np.ndarray = self.W @ self.Z + np.random.randn(D, N) * np.sqrt(
+        self.X: np.ndarray = (self.W @ self.Z) + np.random.randn(D, N) * np.sqrt(
             self.sigma_sq
         )
-        self.bar_x = self.X.mean(axis=1).reshape(D, 1)
+        self.bar_x =  self.X.mean(axis=1).reshape(D, 1)
         self.exp_z_hat = np.empty((M, N))
         self.exp_z_zT_hat = np.empty((N, M, M))
         self.W_hat = np.random.randn(D, M)
@@ -58,7 +58,7 @@ class PPCA:
                 + np.trace(self.exp_z_zT_hat[n] @ W_new.T @ W_new)
             )
             assert addition.shape == (1, 1), addition.shape
-            sigma_sq_new += addition[0, 0] / (self.N * self.D)
+            sigma_sq_new += (addition[0, 0] / (self.N * self.D))
         self.W_hat, self.sigma_sq_hat = W_new, sigma_sq_new
 
     def EM(self, n_steps: int = 1, disable=False) -> None:
@@ -87,24 +87,25 @@ class PPCA:
             self.M_step()
             df.append(self.statistics().to_frame().T)
             assert (
-                not np.isnan(self.W_hat).any()
+                not (np.isnan(self.W_hat).any()
                 or np.isinf(self.W_hat).any()
-                or np.isneginf(self.W_hat).any()
+                or np.isneginf(self.W_hat).any())
             ), self.W_hat
             assert (
-                not np.isnan(self.sigma_sq_hat)
+                not (np.isnan(self.sigma_sq_hat)
                 or np.isinf(self.sigma_sq_hat)
                 or np.isneginf(self.sigma_sq_hat)
+                or self.sigma_sq_hat == 0)
             ), self.sigma_sq_hat
             assert (
-                not np.isnan(self.exp_z_hat).any()
+                not (np.isnan(self.exp_z_hat).any()
                 or np.isinf(self.exp_z_hat).any()
-                or np.isneginf(self.exp_z_hat).any()
+                or np.isneginf(self.exp_z_hat).any())
             ), self.exp_z_hat
             assert (
-                not np.isnan(self.exp_z_zT_hat).any()
+                not (np.isnan(self.exp_z_zT_hat).any()
                 or np.isinf(self.exp_z_zT_hat).any()
-                or np.isneginf(self.exp_z_zT_hat).any()
+                or np.isneginf(self.exp_z_zT_hat).any())
             ), self.exp_z_zT_hat
         df = pd.concat(df, axis=0, ignore_index=True)
         fig = px.line(
@@ -118,33 +119,32 @@ class PPCA:
     def ELBO(self) -> float:
         output = 0.0
         for n in range(self.N):
-            output += (
-                -0.5 * self.D * np.log(2 * np.pi * self.sigma_sq_hat)
-                - 0.5
+            output += -1 * (
+                0.5 * self.D * np.log(2 * np.pi * self.sigma_sq_hat)
+                + 0.5
                 * self.M
                 * np.log(
                     2 * np.pi
                 )  # Note that this term is missing from Bishop, in Errata
-                - 0.5 * np.trace(self.exp_z_zT_hat[n])
-                - (0.5 / self.sigma_sq_hat)
+                + 0.5 * np.trace(self.exp_z_zT_hat[n])
+                + (0.5 / self.sigma_sq_hat)
                 * (self.X[:, n].reshape(self.D, 1) - self.bar_x).T
                 @ (self.X[:, n].reshape(self.D, 1) - self.bar_x)
-                + (1 / self.sigma_sq_hat)
+                - (1 / self.sigma_sq_hat)
                 * self.exp_z_hat[:, n].reshape(self.M, 1).T
                 @ self.W_hat.T
                 @ (self.X[:, n].reshape(self.D, 1) - self.bar_x)
-                - (0.5 / self.sigma_sq_hat)
+                + (0.5 / self.sigma_sq_hat)
                 * np.trace(self.exp_z_zT_hat[n] @ self.W_hat.T @ self.W_hat)
             )
-        # Now we add the entropy of the Z distribution
-        bf_M = self.W_hat.T @ self.W_hat + self.sigma_sq_hat * np.eye(self.M)
-        output += sum(
-            0.5
-            * np.log(
-                np.linalg.det(
-                   np.linalg.inv(bf_M)* self.sigma_sq_hat 
+            output += ( 
+                0.5
+                * np.log(
+                    np.linalg.det(
+                    self.exp_z_zT_hat[n] - self.exp_z_hat[:, n].reshape(self.M, 1) @ self.exp_z_hat[:, n].reshape(1, self.M)
+                    )
                 )
+                + (self.M / 2) * (1 + np.log(2 * np.pi))
+                
             )
-            for n in range(self.N)
-        )
         return float(output)

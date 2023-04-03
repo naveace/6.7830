@@ -28,9 +28,9 @@ def test_M_step():
     assert np.allclose(p.W_hat, np.eye(2))
     assert np.allclose(p.sigma_sq_hat, 0.0)
 
-def test_ELBO():
+def test_ELBO_finds_best_max():
     np.random.seed(0)
-    p = PPCA(2, 2, 1_000, np.eye(2), 1.0)
+    p = PPCA(2, 2, 10, np.eye(2), 1.0)
     p.W_hat = np.eye(2)
     p.sigma_sq_hat = 1.0
     p.E_step()
@@ -39,15 +39,30 @@ def test_ELBO():
         p.W_hat = np.random.randn(2, 2)
         p.sigma_sq_hat = np.random.rand()
         assert p.ELBO() <= best_likelihood, f"{p.ELBO()} > {best_likelihood}"
-    p = PPCA(20, 4, 10_000, np.random.randn(20, 4), 3.0)
+
+def test_ELBO_nondecreasing_1():
+    np.random.seed(0)
+    p = PPCA(20, 4, 10, np.random.randn(20, 4), 3.0)
     last_elbo = -np.inf
     for i in tqdm(range(100)):
         p.E_step()
-        assert p.ELBO() > last_elbo * (
-            1.01
-        ), f"{p.ELBO()} <= {last_elbo} on iteration {i}"  # the 1% increase is to avoid numerical issues
+        assert p.ELBO() >= last_elbo , f"{p.ELBO()} <= {last_elbo} on iteration {i}"  # the 1% increase is to avoid numerical issues
         last_elbo = p.ELBO()
         p.M_step()
+        assert p.ELBO() >= last_elbo, f"{p.ELBO()} <= {last_elbo} on iteration {i}"  # the 1% increase is to avoid numerical issues
+
+def test_ELBO_nondecreasing_2():
+    np.random.seed(0)
+    p = PPCA(2, 1, 3, np.random.randn(2, 1), 3.0)
+    last_elbo = -np.inf
+    for i in tqdm(range(100)):
+        p.E_step()
+        assert p.ELBO() >= last_elbo , f"{p.ELBO()} <= {last_elbo} on iteration {i}"  # the 1% increase is to avoid numerical issues
+        last_elbo = p.ELBO()
+        p.M_step()
+        assert p.ELBO() >= last_elbo, f"{p.ELBO()} <= {last_elbo} on iteration {i}"  # the 1% increase is to avoid numerical issues
+
+
 
 
 
