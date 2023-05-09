@@ -27,7 +27,6 @@ class PPCA:
 
     def E_step(self):
         bf_M = self.W_hat.T @ self.W_hat + self.sigma_sq_hat * np.eye(self.M)
-        # TODO: Vectorize
         for n in range(self.N):
             self.exp_z_hat[:, n] = (
                 np.linalg.inv(bf_M)
@@ -113,7 +112,7 @@ class PPCA:
             y=["Distance from true W", "Distance from true sigma_sq", "ELBO"],
             title="Distance from true parameters",
         )
-        fig.show()
+        # fig.show()
         return fig
 
     def ELBO(self) -> float:

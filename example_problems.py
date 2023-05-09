@@ -17,8 +17,8 @@ fig = p.plot_EM(100)
 fig.update_layout(title="Distance from True Params + ELBO")
 
 # %%
-p = PPCA(2, 1, 10_000, np.array([2, 0]).reshape(2, 1), 0.1)
-fig = p.plot_EM(10)
+p = PPCA(10, 5, 2_000, np.random.randn(10, 5), 0.1)
+fig = p.plot_EM(100)
 fig.update_layout(title="Distance from True Params + ELBO")
 fig.update_layout(xaxis_title="Iteration" )
 # %%

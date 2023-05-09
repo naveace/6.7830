@@ -52,7 +52,7 @@ def get_figure(ppca: PPCA) -> go.Figure:
 
 #%%
 figures = []
-for _ in range(10):
+for _ in range(30):
     figures.append(get_figure(ppca))
     ppca.E_step()
     ppca.M_step()
