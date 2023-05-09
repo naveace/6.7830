@@ -1,7 +1,7 @@
 #%%
 from typing import Dict
 from numpy.linalg import inv
-from tqdm.auto import tqdm
+from tqdm import tqdm
 import numpy as np
 import plotly.express as px
 from plotly.graph_objects import Figure
