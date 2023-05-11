@@ -1,0 +1,54 @@
+This is BibTeX, Version 0.99d (TeX Live 2023)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+The style file: unsrtnat.bst
+Database file #1: bibliography/fmt_bib.bib
+Warning--empty journal in kamal2022anatomy
+Warning--can't use both volume and number fields in irvin2019chexpert
+Warning--empty journal in lin2017focal
+Warning--empty journal in moses2021deep
+Warning--empty journal in yan2018weakly
+Warning--empty journal in chen2019lesion
+Warning--empty journal in guan2018diagnose
+You've used 19 entries,
+            2481 wiz_defined-function locations,
+            645 strings with 9408 characters,
+and the built_in function-call counts, 8373 in all, are:
+= -- 519
+> -- 755
+< -- 6
++ -- 273
+- -- 234
+* -- 718
+:= -- 1463
+add.period$ -- 59
+call.type$ -- 19
+change.case$ -- 38
+chr.to.int$ -- 18
+cite$ -- 26
+duplicate$ -- 388
+empty$ -- 644
+format.name$ -- 253
+if$ -- 1688
+int.to.chr$ -- 2
+int.to.str$ -- 20
+missing$ -- 18
+newline$ -- 104
+num.names$ -- 59
+pop$ -- 207
+preamble$ -- 1
+purify$ -- 19
+quote$ -- 0
+skip$ -- 219
+stack$ -- 0
+substring$ -- 135
+swap$ -- 62
+text.length$ -- 3
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 133
+warning$ -- 7
+while$ -- 47
+width$ -- 0
+write$ -- 236
+(There were 7 warnings)

@@ -1,0 +1,22 @@
+\section{Introduction}
+% \evan{Citations will be added}
+Models in medical ML match human radiologists on benchmarks of chest x-ray classification \citep{pham2021interpreting, yuan2020large, ye2020weakly, kamal2022anatomy,irvin2019chexpert,johnson2019mimic}. However the specific model design choices that have been key to their performance are greatly varied... some use medical hierarchies over labels \citep{pham2021interpreting}, others focus on optimization of medical performance metrics\citep{yuan2020large}, and still others have utilized specialized architectures designed to be aware of human anatomy\citep{kamal2022anatomy}. Furthermore the heterogeneity of other design choices such as training procedure or backbone architecture makes it challenging to directly compare the improvement these methods offer.
+
+\textbf{Contributions:} We evaluate a number of design choices and find that there are almost \emph{no} choices that consistently improve model performance over baseline image classification models. Specificially, we train models on three standard chest x-ray classification benchmarks over a grid of these choices and find that:
+\begin{itemize}
+    \item \textbf{Domain-\emph{independent} methods match domain-\emph{specific} ones:} We find models using only domain-independent design choices are statistically indistinguishable from the best domain-specific models on two of our three datasets and highly competitive on the third.
+    \item \textbf{Individual design choices (almost) \emph{never} improve performance:} \emph{No} single design choice significantly improves the performance of a standard ImageNet model across all three datasets. Across all models, we find that very few design choices significantly \emph{increase or decrease} performance across all three datasets, and that those which do produce changes in performance of less than 0.5\% AUROC.
+    % \item \textbf{New Methods Don't Change Clinical Decisions } TODO
+\end{itemize}
+
+These results emphasize the need to compare to strong baselines and robustly estimate the uncertainty in improvements over these baselines when proposing new design choices. They further suggest that additional work is still required to understand what design choices are key to improving model performance in the chest x-ray domain. 
+% While generic image benchmarks often serve as a good starting point for model selection, it is common sense that domain-specific benchmarks should allow us to find better models for a given domain. Although the creation of chest x-ray datasets has prompted the development of models designed specifically for the chest x-ray domain, there has yet to be a systemic evaluation of what modeling choices work well in this domain and to what extent domain-specific models improve performance over generic models.
+
+% In this work we seek to conduct this evaluation through a case study of domain-specific and domain-independent modeling choices in chest x-ray classification. We analyze perfomance across 150 different modeling pipelines and three common chest x-ray classification datasets. Our main contributions are as follows:
+% \begin{itemize}
+%     \item We find that no single modeling choice significantly improves the performance of a standard ImageNet model across all three datasets.
+%     \item Across all modeling pipelines, we find that very few modeling choices significantly \emph{increase or decrease} performance across all three datasets, and that those which do often produces changes in performance of less than 0.5\% AUROC.
+%     \item We find that a fully domain-independent model is statistically indistinguishable from the best domain-specific models on 2 of our three datasets and highly competitive on the third.
+% \end{itemize}
+
+% These findings suggest that additional work is still required to understand how we can best leverage the unique properties of the chest x-ray domain to improve model performance. It further implies that we may want to further study whether we can use standard chest x-ray datasets to distinguish between performance of different modeling choices.

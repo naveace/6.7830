@@ -1,0 +1,2 @@
+bibtexparser==1.2.0
+ipython==7.30.1

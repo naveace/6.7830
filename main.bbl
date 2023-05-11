@@ -1,0 +1,104 @@
+\begin{thebibliography}{19}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Pham et~al.(2021)Pham, Le, Tran, Ngo, and Nguyen]{pham2021interpreting}
+Hieu~H Pham, Tung~T Le, Dat~Q Tran, Dat~T Ngo, and Ha~Q Nguyen.
+\newblock Interpreting chest x-rays via cnns that exploit hierarchical disease dependencies and uncertainty labels.
+\newblock \emph{Neurocomputing}, 437:\penalty0 186--194, 2021.
+
+\bibitem[Yuan et~al.(2020)Yuan, Yan, Sonka, and Yang]{yuan2020large}
+Zhuoning Yuan, Yan Yan, Milan Sonka, and Tianbao Yang.
+\newblock Large-scale robust deep auc maximization: A new surrogate loss and empirical studies on medical image classification.
+\newblock \emph{arXiv preprint arXiv:2012.03173}, 2020.
+
+\bibitem[Ye et~al.(2020)Ye, Yao, Xue, and Li]{ye2020weakly}
+Wenwu Ye, Jin Yao, Hui Xue, and Yi~Li.
+\newblock Weakly supervised lesion localization with probabilistic-cam pooling.
+\newblock In \emph{arXiv preprint arXiv:2005.14480}, 2020.
+
+\bibitem[Kamal et~al.(2022)Kamal, Zunaed, Nizam, and Hasan]{kamal2022anatomy}
+Uday Kamal, Mohammad Zunaed, Nusrat~Binta Nizam, and Taufiq Hasan.
+\newblock Anatomy-xnet: An anatomy aware convolutional neural network for thoracic disease classification in chest x-rays.
+\newblock 2022.
+
+\bibitem[Irvin et~al.(2019)Irvin, Rajpurkar, Ko, Yu, Ciurea-Ilcus, Chute, Marklund, Haghgoo, Ball, Shpanskaya, et~al.]{irvin2019chexpert}
+Jeremy Irvin, Pranav Rajpurkar, Michael Ko, Yifan Yu, Silviana Ciurea-Ilcus, Chris Chute, Henrik Marklund, Behzad Haghgoo, Robyn Ball, Katie Shpanskaya, et~al.
+\newblock Chexpert: A large chest radiograph dataset with uncertainty labels and expert comparison.
+\newblock In \emph{Proceedings of the AAAI conference on artificial intelligence}, volume~33, pages 590--597, 2019.
+
+\bibitem[Johnson et~al.(2019)Johnson, Pollard, Greenbaum, Lungren, Deng, Peng, Lu, Mark, Berkowitz, and Horng]{johnson2019mimic}
+Alistair~EW Johnson, Tom~J Pollard, Nathaniel~R Greenbaum, Matthew~P Lungren, Chih-ying Deng, Yifan Peng, Zhiyong Lu, Roger~G Mark, Seth~J Berkowitz, and Steven Horng.
+\newblock Mimic-cxr-jpg, a large publicly available database of labeled chest radiographs.
+\newblock \emph{arXiv preprint arXiv:1901.07042}, 2019.
+
+\bibitem[Lin et~al.(2017)Lin, Goyal, Girshick, He, and Dollar]{lin2017focal}
+Tsung-Yi Lin, Priya Goyal, Ross Girshick, Kaiming He, and Piotr Dollar.
+\newblock Focal loss for dense object detection.
+\newblock 2017.
+
+\bibitem[Rajpurkar et~al.(2017)Rajpurkar, Irvin, Zhu, Yang, Mehta, Duan, Ding, Bagul, Langlotz, Shpanskaya, et~al.]{rajpurkar2017chexnet}
+Pranav Rajpurkar, Jeremy Irvin, Kaylie Zhu, Brandon Yang, Hershel Mehta, Tony Duan, Daisy Ding, Aarti Bagul, Curtis Langlotz, Katie Shpanskaya, et~al.
+\newblock Chexnet: Radiologist-level pneumonia detection on chest x-rays with deep learning.
+\newblock \emph{arXiv preprint arXiv:1711.05225}, 2017.
+
+\bibitem[Moses(2021)]{moses2021deep}
+Daniel~A Moses.
+\newblock Deep learning applied to automatic disease detection using chest x-rays.
+\newblock 2021.
+
+\bibitem[Paszke et~al.(2019)Paszke, Gross, Massa, Lerer, Bradbury, Chanan, Killeen, Lin, Gimelshein, Antiga, Desmaison, Kopf, Yang, DeVito, Raison, Tejani, Chilamkurthy, Steiner, Fang, Bai, and Chintala]{paszke2019pytorch}
+Adam Paszke, Sam Gross, Francisco Massa, Adam Lerer, James Bradbury, Gregory Chanan, Trevor Killeen, Zeming Lin, Natalia Gimelshein, Luca Antiga, Alban Desmaison, Andreas Kopf, Edward Yang, Zachary DeVito, Martin Raison, Alykhan Tejani, Sasank Chilamkurthy, Benoit Steiner, Lu~Fang, Junjie Bai, and Soumith Chintala.
+\newblock Pytorch: An imperative style, high-performance deep learning library.
+\newblock In H.~Wallach, H.~Larochelle, A.~Beygelzimer, F.~d\textquotesingle Alch\'{e}-Buc, E.~Fox, and R.~Garnett, editors, \emph{Advances in Neural Information Processing Systems 32}, pages 8024--8035. Curran Associates, Inc., 2019.
+\newblock URL \url{http://papers.neurips.cc/paper/9015-pytorch-an-imperative-style-high-performance-deep-learning-library.pdf}.
+
+\bibitem[Krizhevsky(2009)]{krizhevsky2009learning}
+Alex Krizhevsky.
+\newblock Learning multiple layers of features from tiny images.
+\newblock In \emph{Technical report}, 2009.
+
+\bibitem[Zhang et~al.(2017)Zhang, Cisse, Dauphin, and Lopez-Paz]{zhang2017mixup}
+Hongyi Zhang, Moustapha Cisse, Yann~N Dauphin, and David Lopez-Paz.
+\newblock mixup: Beyond empirical risk minimization.
+\newblock \emph{arXiv preprint arXiv:1710.09412}, 2017.
+
+\bibitem[Deng et~al.(2009)Deng, Dong, Socher, Li, Li, and Fei-Fei]{deng2009imagenet}
+Jia Deng, Wei Dong, Richard Socher, Li-Jia Li, Kai Li, and Li~Fei-Fei.
+\newblock Imagenet: A large-scale hierarchical image database.
+\newblock In \emph{Computer Vision and Pattern Recognition (CVPR)}, 2009.
+
+\bibitem[Wang et~al.(2017)Wang, Peng, Lu, Lu, Bagheri, and Summers]{wang2017chestx}
+Xiaosong Wang, Yifan Peng, Le~Lu, Zhiyong Lu, Mohammadhadi Bagheri, and Ronald~M Summers.
+\newblock Chestx-ray8: Hospital-scale chest x-ray database and benchmarks on weakly-supervised classification and localization of common thorax diseases.
+\newblock In \emph{Proceedings of the IEEE conference on computer vision and pattern recognition (CVPR)}, 2017.
+
+\bibitem[Developers(2016)]{developers2016pytorch}
+PyTorch Developers.
+\newblock Pytorch imagenet example.
+\newblock \url{https://github.com/pytorch/examples/tree/master/imagenet}, 2016.
+
+\bibitem[Chen et~al.(2019{\natexlab{a}})Chen, Miao, Xu, Hager, and Harrison]{chen2019deep}
+Haomin Chen, Shun Miao, Daguang Xu, Gregory~D. Hager, and Adam~P. Harrison.
+\newblock Deep hierarchical multi-label classification of chest x-ray images.
+\newblock In \emph{International Conference on Medical Imaging with Deep Learning}, 2019{\natexlab{a}}.
+
+\bibitem[Yan et~al.(2018)Yan, Yao, Li, Xu, and Huang]{yan2018weakly}
+Chaochao Yan, Jiawen Yao, Ruoyu Li, Zheng Xu, and Junzhou Huang.
+\newblock Weakly supervised deep learning for thoracic disease classification and localization on chest x-rays.
+\newblock 2018.
+
+\bibitem[Chen et~al.(2019{\natexlab{b}})Chen, Li, Lu, and Zhang]{chen2019lesion}
+Bingzhi Chen, Jinxing Li, Guangming Lu, and David Zhang.
+\newblock Lesion location attention guided network for multi-label thoracic disease classification in chest x-rays.
+\newblock 2019{\natexlab{b}}.
+
+\bibitem[Guan et~al.(2018)Guan, Huang, Zhong, Zheng, Zheng, and Yang]{guan2018diagnose}
+Qingji Guan, Yaping Huang, Zhun Zhong, Zhedong Zheng, Liang Zheng, and Yi~Yang.
+\newblock Diagnose like a radiologist: Attention guided convolutional neural network for thorax disease classification.
+\newblock 2018.
+
+\end{thebibliography}

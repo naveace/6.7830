@@ -1,0 +1,208 @@
+\documentclass{article}
+
+% if you need to pass options to natbib, use, e.g.:
+%     \PassOptionsToPackage{numbers, compress}{natbib}
+% before loading neurips_2020
+
+% ready for submission
+% \usepackage{neurips_2020}
+
+% to compile a preprint version, e.g., for submission to arXiv, add add the
+% [preprint] option:
+%     \usepackage[preprint]{neurips_2020}
+
+% to compile a camera-ready version, add the [final] option, e.g.:
+%     \usepackage[final]{neurips_2020}
+
+% to avoid loading the natbib package, add option nonatbib:
+\usepackage[preprint]{neurips_2020}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{amsmath}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{adjustbox}
+\usepackage{marginnote}
+\usepackage{pifont}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{makecell}
+\usepackage{multirow}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{tikz}
+
+% \newcommand*\colorcheck[1]{%
+%   \expandafter\newcommand\csname #1check\endcsname{\textcolor{#1}{\ding{52}}}%
+% }
+
+
+\newcommand{\greencheck}{{\color{Green}\ding{52}}}
+\newcommand{\redx}{{\color{Red}\ding{55}}}
+
+
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\usetikzlibrary{calc}
+\usepackage{bbm}
+
+% \usepackage{multirow} 
+\usepackage{booktabs}
+\usepackage{longtable} 
+\usepackage{makecell, multirow}
+
+\usepackage{adjustbox}
+
+\usepackage{array}
+\usepackage{bbm}
+
+\newcommand{\nih}{\textsc{NIH}}
+\usepackage[colorinlistoftodos]{todonotes}
+
+\newcommand{\chexpert}{\textsc{CheXpert}}
+\newcommand{\mimic}{\textsc{MIMIC}}
+\newcommand{\spur}{\textsc{Spurious}}
+\newcommand{\full}{\textsc{Standard}}
+\newcommand{\fg}{\textsc{Foreground}}
+\newcommand{\lf}[1]{``#1''}
+\usepackage{dsfont}
+
+\usepackage{amsmath}
+% \newcommand{\logan}[1]{\marginnote{\textcolor{blue}{\textbf{Logan:} #1}}}
+% \newcommand{\logan}[1]{%
+%   \marginnote{\color{orange}\framebox{\textcolor{black}{Logan}}}[0pt]\textcolor{black}{#1}%
+% }
+
+
+\newcommand{\logan}[1]{%
+  \todo{\textbf{Logan}: #1}
+}
+\newcommand{\evan}[1]{%
+  \todo{\textbf{Evan}: #1}
+}
+
+\newcommand{\robf}{robust}
+\newcommand{\spurf}{spurious}
+\newcommand{\robfc}{Robust}
+\newcommand{\spurfc}{Spurious}
+
+
+\newcommand{\bayesboth}{\hat{Y}}
+\newcommand{\bayess}{\hat{Y}_\mathrm{Spur}}
+\newcommand{\bayesr}{\hat{Y}_\mathrm{Rob}}
+
+
+% \newcommand{\indep}{\perp \!\!\! \perp}
+
+% \newcommand\indep{\protect\mathpalette{\protect\independenT}{\perp}}
+% \def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+
+\newcommand{\indep}{\perp\!\!\!\perp}
+\newcommand{\nindep}{\not\!\indep{}}
+
+\newcommand{\spurlogs}{\mathrm{logits}_{\mathrm{\spurf{}}}}
+\newcommand{\stanlogs}{\mathrm{logits}_{\mathrm{standard}}}
+
+\newcommand{\Ddeploy}{D_{d_\mathrm{deploy}}}
+\newcommand{\Dint}{D_{d_\mathrm{internal}}}
+\newcommand{\Dext}{D_{d_\mathrm{external}}}
+\newcommand{\bern}{\mathrm{Bernoulli}}
+\newcommand{\normal}{\mathcal{N}}
+\newcommand{\lambdaorig}{{\lambda_{\mathrm{train}}}}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator{\E}{\mathbb{E}}
+\DeclareMathOperator{\Prob}{\mathrm{P}}
+% \DeclareMathOperator{\ind}{\mathbb{1}}
+\newcommand{\ind}[1]{\mathds{1}{\left\{#1\right\}}}
+
+\DeclareMathOperator*{\xs}{x_{spur}}
+\DeclareMathOperator*{\xr}{x_{rob}}
+\usepackage{nicefrac}
+
+\usepackage{xstring}
+\usepackage{xspace}
+\usepackage{ifthen}
+
+
+\newcolumntype{R}[2]{%
+    >{\adjustbox{angle=#1,lap=\width-(#2)}\bgroup}%
+    l%
+    <{\egroup}%
+}
+\newcommand*\rot{\multicolumn{1}{R{40}{1em}}}% no optional argument here, please!
+\newcommand*\rotff{\multicolumn{1}{R{55}{1em}}}% no optional argument here, please!
+\newcommand*\rothalf{\multicolumn{1}{R{90}{1em}}}% no optional argument here, please!
+
+\newcolumntype{W}[1]{>{\raggedleft\arraybackslash}p{#1}}
+
+\bibliographystyle{unsrtnat}
+
+\title{What Works In Chest X-ray Classification? A Case Study of Design Choices}
+
+% The \author macro works with any number of authors. There are two commands
+% used to separate the names and addresses of multiple authors: \And and \AND.
+%
+% Using \And between authors leaves it to LaTeX to determine where to break the
+% lines. Using \AND forces a line break at that point. So, if LaTeX puts 3 of 4
+% authors names on the first line, and the last on the second line, try using
+% \AND instead of \And before the third author name.
+
+\author{%
+  Evan Vogelbaum\\
+  MIT\\
+  \texttt{evanv@mit.edu} \\
+  \And
+  Logan Engstrom\\
+  MIT\\
+  \texttt{engstrom@mit.edu} \\
+  \And
+  Aleksander M\k{a}dry\\
+  MIT\\
+  \texttt{madry@mit.edu}
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  \input{sections/abstract.tex}
+\end{abstract}
+
+\input
+
+\input{sections/introduction.tex}
+\input{sections/methods.tex}
+\input{sections/results.tex}
+\input{sections/related_work.tex}
+\input{sections/conclusion.tex}
+
+% \section*{Broader Impact}
+
+% \section*{References}
+
+% \section*{Acknowledgments}
+% \begin{ack}
+%   Thank you to..
+% \end{ack}
+
+\bibliography{bibliography/fmt_bib}
+
+\newpage
+\appendix
+\input{sections/appendix}
+
+\end{document}

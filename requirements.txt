@@ -1,0 +1,8 @@
+numpy
+plotly
+scipy
+torch
+torchvision
+pandas
+tqdm
+pathlib
