@@ -14,83 +14,25 @@
 \providecommand\HyField@AuxAddToFields[1]{}
 \providecommand\HyField@AuxAddToCoFields[2]{}
 \bibstyle{unsrtnat}
-\citation{pham2021interpreting,yuan2020large,ye2020weakly,kamal2022anatomy,irvin2019chexpert,johnson2019mimic}
-\citation{pham2021interpreting}
-\citation{yuan2020large}
-\citation{kamal2022anatomy}
+\citation{bishop2006pattern}
+\citation{tipping1999probabilistic}
 \providecommand \oddpage@label [2]{}
 \@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
-\citation{lin2017focal}
-\citation{rajpurkar2017chexnet}
-\citation{yuan2020large}
-\citation{pham2021interpreting}
-\citation{moses2021deep}
-\citation{ye2020weakly}
-\citation{paszke2019pytorch}
-\citation{krizhevsky2009learning}
-\citation{zhang2017mixup}
-\citation{deng2009imagenet}
-\citation{irvin2019chexpert}
-\citation{johnson2019mimic}
-\citation{wang2017chestx}
-\citation{pham2021interpreting}
-\citation{irvin2019chexpert}
-\@writefile{toc}{\contentsline {section}{\numberline {2}Methods}{2}{section.2}\protected@file@percent }
-\newlabel{sec:methods}{{2}{2}{Methods}{section.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Construction of Methods}{2}{subsection.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Datasets}{2}{subsection.2.2}\protected@file@percent }
-\citation{developers2016pytorch}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Trying to improve a standard ImageNet baseline. Each panel shows the change in performance achieved by swapping out one component of a standard ImageNet baseline (No Augmentation, ResNet-50, BCE Loss, Standard Pooling) with a different design choice. Remarkably there is \emph  {no single change we can make} that results in a statisticaly significant improvement in AUROC across all three benchmarks. \relax }}{3}{figure.caption.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2}Background on PPCA}{1}{section.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Developing Intuition for the Generative Model}{1}{section.3}\protected@file@percent }
+\citation{tipping1999mixtures}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Developing inuition for the generative model. The example allows the user to step through the process of sampling from the generative model for PPCA. At each step a new point is sampled from latent space, modifying the lower histogram in red. The dataspace then also updates showing where that point projects to as a result of the principal direction $W$ and the noise $\sigma ^2$. The user can easily change these parameters and remake the visualization to see how the data space changes.\relax }}{2}{figure.caption.2}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{fig:imagenet-baseline}{{1}{3}{Trying to improve a standard ImageNet baseline. Each panel shows the change in performance achieved by swapping out one component of a standard ImageNet baseline (No Augmentation, ResNet-50, BCE Loss, Standard Pooling) with a different design choice. Remarkably there is \emph {no single change we can make} that results in a statisticaly significant improvement in AUROC across all three benchmarks. \relax }{figure.caption.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Training and Evaluation}{3}{subsection.2.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3}Results}{3}{section.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Motivating Example: Improving a Standard ImageNet Baseline}{3}{subsection.3.1}\protected@file@percent }
-\newlabel{subsec:imagenet-baseline}{{3.1}{3}{Motivating Example: Improving a Standard ImageNet Baseline}{subsection.3.1}{}}
-\citation{irvin2019chexpert,pham2021interpreting,rajpurkar2017chexnet}
-\citation{irvin2019chexpert}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Average Treatment Effect of design choices over baseline choices. We conduct a controlled comparison of design choices by evaluating the average change in AUROC across all methods when we swap out a baseline choice. Almost no design choices consistently increase or decrease AUROC across all three datasets. Those that do (PCAM pooling, CheXNet loss type, ResNet-18 and VGG-16 backbone, and CIFAR data augmentation) produce changes that are often less than 0.5\% AUROC meaning they have a very small treatment effect. \relax }}{4}{figure.caption.3}\protected@file@percent }
-\newlabel{fig:controlled-comparison}{{2}{4}{Average Treatment Effect of design choices over baseline choices. We conduct a controlled comparison of design choices by evaluating the average change in AUROC across all methods when we swap out a baseline choice. Almost no design choices consistently increase or decrease AUROC across all three datasets. Those that do (PCAM pooling, CheXNet loss type, ResNet-18 and VGG-16 backbone, and CIFAR data augmentation) produce changes that are often less than 0.5\% AUROC meaning they have a very small treatment effect. \relax }{figure.caption.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Comparing Design Choices}{4}{subsection.3.2}\protected@file@percent }
-\newlabel{subsec:controlled-comparison}{{3.2}{4}{Comparing Design Choices}{subsection.3.2}{}}
-\citation{wang2017chestx}
-\citation{irvin2019chexpert,johnson2019mimic}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces  Comparing the best versions of domain-specific design choices with domain-independent baselines. For each domain-specific design choice we compare the best method we can construct using that choice with the best method we can construct using only domain-independent choices. We find that on CheXpert and MIMIC the domain-independent baseline is just as strong as the best methods we can construct using domain-specific choices. On Chest X-ray 14 the domain-independent baseline is not quite as strong as the best methods using domain-specific choices, but it is still comparable to Hierarchical Loss and it is within 1\% AUROC of other methods. \relax }}{5}{figure.caption.4}\protected@file@percent }
-\newlabel{fig:best-method-per-choice}{{3}{5}{Comparing the best versions of domain-specific design choices with domain-independent baselines. For each domain-specific design choice we compare the best method we can construct using that choice with the best method we can construct using only domain-independent choices. We find that on CheXpert and MIMIC the domain-independent baseline is just as strong as the best methods we can construct using domain-specific choices. On Chest X-ray 14 the domain-independent baseline is not quite as strong as the best methods using domain-specific choices, but it is still comparable to Hierarchical Loss and it is within 1\% AUROC of other methods. \relax }{figure.caption.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Comparing domain-specific choices to baselines ones}{5}{subsection.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4}Related Work}{5}{section.4}\protected@file@percent }
-\citation{yuan2020large}
-\citation{pham2021interpreting}
-\citation{ye2020weakly}
-\citation{yuan2020large}
-\citation{pham2021interpreting}
-\citation{chen2019deep}
-\citation{ye2020weakly}
-\citation{kamal2022anatomy}
-\citation{yan2018weakly}
-\citation{chen2019lesion}
-\citation{guan2018diagnose}
+\newlabel{fig:dataspace-latentspace}{{1}{2}{Developing inuition for the generative model. The example allows the user to step through the process of sampling from the generative model for PPCA. At each step a new point is sampled from latent space, modifying the lower histogram in red. The dataspace then also updates showing where that point projects to as a result of the principal direction $W$ and the noise $\sigma ^2$. The user can easily change these parameters and remake the visualization to see how the data space changes.\relax }{figure.caption.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Explaining the E-M Algorithm}{2}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}A Worked Example on MNIST}{2}{section.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Interactive examples demonstrating the fast convergence of the E-M algorithm. \textbf  {(Top)} An example of using the E-M to learn $W$ with two dimensional data. Because the data is low-dimensional, we can visualize the convergence of $\hat  {W}$ to the MLE estimate which is very close to the true $W$ given the amount of data. The user can step through the algorithm with a slider and use the code to change the visualization and get an intuition for how convergence changes with changes in the model parameters. \textbf  {(Bottom)} A demonstration of convergence in high dimension. The plots are interactive and the user can modify the parameters of the model and the E-M algorithm to see how quickly it converges and recovers the true values.\relax }}{3}{figure.caption.3}\protected@file@percent }
+\newlabel{fig:em}{{2}{3}{Interactive examples demonstrating the fast convergence of the E-M algorithm. \textbf {(Top)} An example of using the E-M to learn $W$ with two dimensional data. Because the data is low-dimensional, we can visualize the convergence of $\hat {W}$ to the MLE estimate which is very close to the true $W$ given the amount of data. The user can step through the algorithm with a slider and use the code to change the visualization and get an intuition for how convergence changes with changes in the model parameters. \textbf {(Bottom)} A demonstration of convergence in high dimension. The plots are interactive and the user can modify the parameters of the model and the E-M algorithm to see how quickly it converges and recovers the true values.\relax }{figure.caption.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces A worked example on MNIST. We fit a PPCA model using only a handful of components to the data for one class in the MNIST dataset. Because the model is fully probabilistic, we can compute marginal likelihood over individual datapoints and see highly unlikely datapoints. This example shows the user an interesting and practical application of PPCA that would not be feasible with PCA!\relax }}{3}{figure.caption.4}\protected@file@percent }
+\newlabel{fig:mnist}{{3}{3}{A worked example on MNIST. We fit a PPCA model using only a handful of components to the data for one class in the MNIST dataset. Because the model is fully probabilistic, we can compute marginal likelihood over individual datapoints and see highly unlikely datapoints. This example shows the user an interesting and practical application of PPCA that would not be feasible with PCA!\relax }{figure.caption.4}{}}
 \bibdata{bibliography/fmt_bib}
-\bibcite{pham2021interpreting}{{1}{2021}{{Pham et~al.}}{{Pham, Le, Tran, Ngo, and Nguyen}}}
-\bibcite{yuan2020large}{{2}{2020}{{Yuan et~al.}}{{Yuan, Yan, Sonka, and Yang}}}
-\bibcite{ye2020weakly}{{3}{2020}{{Ye et~al.}}{{Ye, Yao, Xue, and Li}}}
-\bibcite{kamal2022anatomy}{{4}{2022}{{Kamal et~al.}}{{Kamal, Zunaed, Nizam, and Hasan}}}
-\bibcite{irvin2019chexpert}{{5}{2019}{{Irvin et~al.}}{{Irvin, Rajpurkar, Ko, Yu, Ciurea-Ilcus, Chute, Marklund, Haghgoo, Ball, Shpanskaya, et~al.}}}
-\bibcite{johnson2019mimic}{{6}{2019}{{Johnson et~al.}}{{Johnson, Pollard, Greenbaum, Lungren, Deng, Peng, Lu, Mark, Berkowitz, and Horng}}}
-\bibcite{lin2017focal}{{7}{2017}{{Lin et~al.}}{{Lin, Goyal, Girshick, He, and Dollar}}}
-\bibcite{rajpurkar2017chexnet}{{8}{2017}{{Rajpurkar et~al.}}{{Rajpurkar, Irvin, Zhu, Yang, Mehta, Duan, Ding, Bagul, Langlotz, Shpanskaya, et~al.}}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusion}{6}{section.5}\protected@file@percent }
-\bibcite{moses2021deep}{{9}{2021}{{Moses}}{{}}}
-\bibcite{paszke2019pytorch}{{10}{2019}{{Paszke et~al.}}{{Paszke, Gross, Massa, Lerer, Bradbury, Chanan, Killeen, Lin, Gimelshein, Antiga, Desmaison, Kopf, Yang, DeVito, Raison, Tejani, Chilamkurthy, Steiner, Fang, Bai, and Chintala}}}
-\bibcite{krizhevsky2009learning}{{11}{2009}{{Krizhevsky}}{{}}}
-\bibcite{zhang2017mixup}{{12}{2017}{{Zhang et~al.}}{{Zhang, Cisse, Dauphin, and Lopez-Paz}}}
-\bibcite{deng2009imagenet}{{13}{2009}{{Deng et~al.}}{{Deng, Dong, Socher, Li, Li, and Fei-Fei}}}
-\bibcite{wang2017chestx}{{14}{2017}{{Wang et~al.}}{{Wang, Peng, Lu, Lu, Bagheri, and Summers}}}
-\bibcite{developers2016pytorch}{{15}{2016}{{Developers}}{{}}}
-\bibcite{chen2019deep}{{16}{2019{a}}{{Chen et~al.}}{{Chen, Miao, Xu, Hager, and Harrison}}}
-\bibcite{yan2018weakly}{{17}{2018}{{Yan et~al.}}{{Yan, Yao, Li, Xu, and Huang}}}
-\bibcite{chen2019lesion}{{18}{2019{b}}{{Chen et~al.}}{{Chen, Li, Lu, and Zhang}}}
-\bibcite{guan2018diagnose}{{19}{2018}{{Guan et~al.}}{{Guan, Huang, Zhong, Zheng, Zheng, and Yang}}}
-\citation{pham2021interpreting}
-\citation{irvin2019chexpert}
-\gdef \@abspage@last{8}
+\bibcite{bishop2006pattern}{{1}{2006}{{Bishop}}{{}}}
+\bibcite{tipping1999probabilistic}{{2}{1999{a}}{{Tipping and Bishop}}{{}}}
+\bibcite{tipping1999mixtures}{{3}{1999{b}}{{Tipping and Bishop}}{{}}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion \& Next Steps}{4}{section.6}\protected@file@percent }
+\gdef \@abspage@last{4}

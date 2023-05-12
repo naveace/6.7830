@@ -3,52 +3,47 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: main.aux
 The style file: unsrtnat.bst
 Database file #1: bibliography/fmt_bib.bib
-Warning--empty journal in kamal2022anatomy
-Warning--can't use both volume and number fields in irvin2019chexpert
-Warning--empty journal in lin2017focal
-Warning--empty journal in moses2021deep
-Warning--empty journal in yan2018weakly
-Warning--empty journal in chen2019lesion
-Warning--empty journal in guan2018diagnose
-You've used 19 entries,
+Warning--empty journal in tipping1999probabilistic
+Warning--empty journal in tipping1999mixtures
+You've used 3 entries,
             2481 wiz_defined-function locations,
-            645 strings with 9408 characters,
-and the built_in function-call counts, 8373 in all, are:
-= -- 519
-> -- 755
-< -- 6
-+ -- 273
-- -- 234
-* -- 718
-:= -- 1463
-add.period$ -- 59
-call.type$ -- 19
-change.case$ -- 38
-chr.to.int$ -- 18
-cite$ -- 26
-duplicate$ -- 388
-empty$ -- 644
-format.name$ -- 253
-if$ -- 1688
+            564 strings with 4804 characters,
+and the built_in function-call counts, 892 in all, are:
+= -- 68
+> -- 37
+< -- 3
++ -- 17
+- -- 10
+* -- 51
+:= -- 149
+add.period$ -- 9
+call.type$ -- 3
+change.case$ -- 5
+chr.to.int$ -- 2
+cite$ -- 5
+duplicate$ -- 55
+empty$ -- 87
+format.name$ -- 17
+if$ -- 183
 int.to.chr$ -- 2
-int.to.str$ -- 20
-missing$ -- 18
-newline$ -- 104
-num.names$ -- 59
-pop$ -- 207
+int.to.str$ -- 4
+missing$ -- 4
+newline$ -- 23
+num.names$ -- 9
+pop$ -- 34
 preamble$ -- 1
-purify$ -- 19
+purify$ -- 3
 quote$ -- 0
-skip$ -- 219
+skip$ -- 32
 stack$ -- 0
-substring$ -- 135
-swap$ -- 62
-text.length$ -- 3
+substring$ -- 6
+swap$ -- 6
+text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 133
-warning$ -- 7
-while$ -- 47
+type$ -- 18
+warning$ -- 2
+while$ -- 6
 width$ -- 0
-write$ -- 236
-(There were 7 warnings)
+write$ -- 41
+(There were 2 warnings)

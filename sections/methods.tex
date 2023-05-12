@@ -1,41 +1,27 @@
-\section{Methods}
-\label{sec:methods}
-\subsection{Construction of Methods}
-Our goal is to understand which design choices consistently improve performance in chest x-ray classification and whether domain-specific choices outperform domain-independent ones. This requires that we identify a wide variety of both domain-specific and domain-independent design choices which lead to competitive results. We also want to understand the impact of a design choices independent of the other choices we make for the components of a model. To that end we construct our \emph{methods} combinatorially, choosing one of the following options for each component of the method. We use star ($\star$) to indicate chest x-ray domain-specific choices.
-\begin{enumerate}
-    \item \textbf{Loss Function}:
-        \begin{itemize}
-            \item Standard Binary Cross Entropy loss (BCE) 
-            \item Focal Loss (Focal): \citet{lin2017focal}'s loss function designed to handle class imbalance.
-            \item[$\star$] CheXNet BCE (CheXNet): BCE loss with weights designed to balance the binary labels for each class as proposed by \citet{rajpurkar2017chexnet}.
-            % Because of widely varying label imbalances across classes we also consider focal loss \citep{lin2017focal} as a loss function. This loss function has seen wide success in object detection when there is extreme class imbalance and serves as a second strong baseline to compare chest x-ray specific methods against. \evan{note that LibAUC compared to this as additional motivation?}
-            \item[$\star$]Deep AUC Maximization (DAM): \citet{yuan2020large}'s novel loss function designed to directly maximize AUROC, the standard metric for chest x-ray classification.
-            % . Following their work we first pretrain each model using BCE loss and then fine tune each class seperately using the DAM loss function. The final model makes predictions for each class seperately using the fine tuned models. \evan{Should these details go in appendix?}
-            \item[$\star$]  Hierarchical Training (Hierarchical): \citet{pham2021interpreting}'s hierarchical training method which uses a medical hierarchy over labels.
-            %. Following their work we pretrain conditionally using masked labels and then fine tune using the novel loss function of \citet{chen2019deep}. We make predictions as described in \citet{pham2021interpreting} using Bayes rule to get unconditional probabilities.
-        \end{itemize}
-    \item \textbf{Backbone}: We consider 5 different backbones for our methods: ResNet-18, ResNet-50, DenseNet-121, VGG16, and VGG19 with Batch Norm. All of these backbones have been used in chest x-ray classification \citep{moses2021deep}.
-    \item \textbf{Pooling Function}: 
-        \begin{itemize}
-            \item[$\star$] PCAM: We use the PCAM module \citep{ye2020weakly}, which was designed for chest x-ray classification, as the pooling function.
-            \item Standard: We use the standard pooling function for the backbone of the method as implemented in \texttt{torvision} \citep{paszke2019pytorch}.
-        \end{itemize}
-    \item \textbf{Data Augmentation}: We consider three data augmentation schemes: 
-        \begin{itemize}
-            \item No Augmentation (No Aug): No data augmentation is used.
-            \item Random Translate \& Cutout (CIFAR): We randomly translate and cutout a portion of the image. This augmentation is representative of a standard augmentation scheme for the CIFAR-10 dataset \citep{krizhevsky2009learning}. 
-            \item Color Jitter with Random Crop \& Mixup (ImageNet): We use color jitter, random crop and mixup \citep{zhang2017mixup} as a representative of a standard augmentation scheme for the ImageNet dataset \citep{deng2009imagenet}.
-        \end{itemize} 
-    % No Augmentation (No Aug), Random Translate \& Cutout (RT+CO), and Color Jitter with Random Crop \& Mixup (CJ+RC+MU)
-   \end{enumerate}
-
-\subsection{Datasets}
-
-We evaluate each method on the CheXpert \citep{irvin2019chexpert}, MIMIC-CXR \citep{johnson2019mimic}, and Chest X-ray 14 \citep{wang2017chestx} datasets\footnotemark\footnotetext{We follow \citet{pham2021interpreting} for a hierarchy for the CheXpert and MIMIC-CXR datasets and construct our own medically valid hierarchy for Chest X-ray 14 dataset. All three are included in the appendix.}. The CheXpert dataset uses different labeling processes for its training and validation splits. To avoid distributional mismatch between the data we train on and the data we use for hyperparameter tuning we randomly re-split the CheXpert train set, keeping 80\% of the original for training and using 10\% as a validation set and 10\% as a test set. We ensure that splitting is done so as to avoid overlap between patients across the partitions. For the MIMIC-CXR and Chest X-Ray 14 datasets, we use the given validation and test sets as they do not have this distributional mismatch issue. For both CheXpert and MIMIC-CXR we ignore uncertainty labels (the U-IGNORE strategy in \citet{irvin2019chexpert}) for ease of implementation and comparison with the Chest X-ray 14 dataset which does not have uncertainty labels.
-\subsection{Training and Evaluation}
-For each method, we perform a grid search over the learning rate and weight decay using a 6x6 grid. We also grid search over  other parameters relevant to the method such as $\gamma$ for methods that use Focal Loss as the loss function. For methods that require finetuning, such as those using the Hierarchical or DAM loss functions, we first conduct a grid search over models for the pretraining step and select the best pretrained model to perform a second grid search on for finetuning. To reduce computational load we prune all runs that cannot achieve an average of 0.6 AUROC on the validation set after 2 epochs. These intensive grid searches ensure that for every method we consider we get close to the best possible performance that the method can achieve on each dataset.
-
-On all datasets we evaluate performance using AUROC as is standard in chest x-ray classification. On CheXpert and MIMIC-CXR, we use the average performance of the 5 classes used in the test set for the CheXpert competition as our score for a method. On Chest X-ray 14, we use the average AUROC across all 14 labels. To evaluate uncertainty in our scores we recompute the test AUROC of each method using 1000 bootstrap samples over the test partition for each dataset. 
-%We also re-run our best models with 20 different random seeds to obtain model level uncertainty. \evan{This is still TODO}
-
-
+\section{Developing Intuition for the Generative Model}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.4]{figures/dataspace-latentspace.png}
+    \caption{Developing inuition for the generative model. The example allows the user to step through the process of sampling from the generative model for PPCA. At each step a new point is sampled from latent space, modifying the lower histogram in red. The dataspace then also updates showing where that point projects to as a result of the principal direction $W$ and the noise $\sigma^2$. The user can easily change these parameters and remake the visualization to see how the data space changes.}
+    \label{fig:dataspace-latentspace}
+\end{figure}
+Our tutorial begins with an interactive visualization of the data generating process that PPCA encodes. This visualization is shown in Figure \ref{fig:dataspace-latentspace}. The visualization consists of two main plots: data space and latent space. The user can use a slider to walk through the process of sampling from the data generating process for PPCA. At each step a new $z$ is drawn, changing the histogram in the latent space plot. A new point is then placed into data space by projecting $z$ using $W$ and randomly translating using gaussian noise given by $\sigma^2$. The user can easily modify code (not shown) to change $W$ and $\sigma^2$ to see how the process changes. The tutorial also poses some questions to the user to help them test their intuition about the data generating process. 
+\section{Explaining the E-M Algorithm}
+% Modify the above example to make one figure on top of two figures side by side
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.4]{figures/em-algo-dataspace.png}
+    \includegraphics[width=0.45\textwidth]{figures/em-algo-high-dim-params.png}
+    \includegraphics[width=0.45\textwidth]{figures/em-algo-high-dim-elbo.png}
+    \caption{Interactive examples demonstrating the fast convergence of the E-M algorithm. \textbf{(Top)} An example of using the E-M to learn $W$ with two dimensional data. Because the data is low-dimensional, we can visualize the convergence of $\hat{W}$ to the MLE estimate which is very close to the true $W$ given the amount of data. The user can step through the algorithm with a slider and use the code to change the visualization and get an intuition for how convergence changes with changes in the model parameters. \textbf{(Bottom)} A demonstration of convergence in high dimension. The plots are interactive and the user can modify the parameters of the model and the E-M algorithm to see how quickly it converges and recovers the true values.}
+    \label{fig:em}
+\end{figure}
+While understanding the data generating process is important, the model is not very complex and as a result the primary use of PPCA is to fit the parameters to some existing data. Although closed form solutions exist for the MLE estimates of the parameters, they are not always practical to implement as they involve SVD on a $D\times D$ covariance matrix. When $D$ is large, this makes the algorithm unusable. Maintaining our focus on practical application and intuition development, the second part of our tutorial focuses on the much more efficient E-M algorithm for PPCA. Figure \ref{fig:em} shows the three interactive examples we developed for this section. The top figure shows a data space example where the user can use a slider to move through the steps of E-M and see how $\hat{W}$ converges towards the true $W$. This example is great for developing intuition as the low dimensionality of our data allows us to visualize the convergence in a very direct way. However for high dimensional data we cannot do this. Instead in the bottom figures we show how distance between the estimated and true parameters changes as a function of E-M iteration as well as how the ELBO increases. As in the previous section, the user can easily modify just a few lines in the code to change the dimensionality and true parameters to get intuition for how convergence changes as these values vary. 
+\section{A Worked Example on MNIST}
+\begin{figure}[!h]
+    \centering
+    \includegraphics[scale=0.4]{figures/mnist-example.png}
+    \caption{A worked example on MNIST. We fit a PPCA model using only a handful of components to the data for one class in the MNIST dataset. Because the model is fully probabilistic, we can compute marginal likelihood over individual datapoints and see highly unlikely datapoints. This example shows the user an interesting and practical application of PPCA that would not be feasible with PCA!}
+    \label{fig:mnist}
+\end{figure}
+The final section of our tutorial is a worked example demonstrating how PPCA allows for additional applications beyond what would be possible using standard PCA. For our example we consider the MNIST dataset--a real world dataset that is not at all necessarily generated exactly from the data generating process PPCA defines. We fit a PPCA model to the images for one digit in the dataset. We then show how we can use the fact that PPCA gives a marginal likelihood to every datapoint it fits to identify possibly mislabeled datapoints or just hard subpopulations. Figure \ref{fig:mnist} shows that this technique successfully identifies at least one impossible or mislabeled example (top left) as well as a very challenging subpopulation (cursive 2's). The user can easily modify the parameters for PPCA as well as which digit's images are used to fit the model and get a sense for how the results change. 
